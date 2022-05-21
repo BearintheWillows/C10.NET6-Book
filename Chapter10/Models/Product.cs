@@ -1,10 +1,10 @@
+namespace WorkingWithEFCore.Models;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WorkingWithEFCore.Models;
-
 public class Product {
-	private int ProductID { get; set; } // Primary Key
+	public int ProductID { get; set; } // Primary Key
 
 	[Required, StringLength( 40 )]
 	public string? ProductName { get; set; } = null;
