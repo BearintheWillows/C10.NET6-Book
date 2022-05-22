@@ -6,6 +6,7 @@ Console.WriteLine( $"Using {ProjectConstants.DbProvider} database provider" );
 
 //QueryingCategories();
 FilteredIncludes();
+// QueryingProducts();
 
 static void QueryingCategories() {
 	Northwind db = new();
@@ -35,16 +36,48 @@ static void FilteredIncludes() {
 	                   .Where( c => c.Products.Any( p => p.Stock >= stock ) );
 
 	if ( categories != null ) { //Execute query and enumerate the results
+
+		Console.WriteLine( $"ToQueryString: {categories.ToQueryString()}" );
+
 		foreach ( var category in categories ) {
-			Console.WriteLine(); 
-			Console.WriteLine($"{category.CategoryName} has {category.Products?.Count} products with a minimum of {stock} units in stock."
+			Console.WriteLine();
+			Console.WriteLine(
+				$"{category.CategoryName} has {category.Products?.Count} products with a minimum of {stock} units in stock."
 			);
-				Console.WriteLine();
-			foreach ( var item in category.Products ) {
+			Console.WriteLine();
+			foreach ( var item in category.Products )
 				Console.WriteLine( $"{item.ProductName} has {item.Stock} units in stock." );
-			}
 		}
+
 	} else {
-				Console.WriteLine( "No categories found" );
+		Console.WriteLine( "No categories found" );
 	}
+}
+
+static void QueryingProducts() {
+	Northwind db = new();
+
+	Console.WriteLine( "Products that cost more than a given price:" ); //Highest at top
+
+	string? input;
+	decimal price;
+
+	do {
+		Console.Write( "Enter a price: " );
+		input = Console.ReadLine();
+	} while ( !decimal.TryParse( input, out price ) );
+
+	IQueryable<Product>? products = db.Products?
+	                                  .Where( p => p.Cost > price )
+	                                  .OrderByDescending( p => p.Cost );
+
+	if ( products is null )
+		Console.WriteLine( "No products found" );
+	else
+		foreach ( var item in products )
+			Console.WriteLine( "{0}: {1} costs {1:$#,##0.00} and has {2} units in stock.",
+			                   item.ProductName,
+			                   item.Cost,
+			                   item.Stock
+			);
 }
