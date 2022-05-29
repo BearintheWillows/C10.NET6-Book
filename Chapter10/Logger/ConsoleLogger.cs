@@ -48,17 +48,25 @@ public class ConsoleLogger : ILogger
 
     public void Log<TState>(LogLevel loglevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception, string> formatter)
     {
-        Console.WriteLine($"{loglevel} - {eventId} - {formatter(state, exception)}");
-
-
-        if (state != null)
+        if (eventId.Id == 20100)
         {
-            Console.Write($", State: {state}");
+            //Log the level and event identifier
+            Console.Write("Level: {0}, Event Id: {1}, Event: {2}",
+                loglevel,
+                eventId.Id,
+                eventId.Name);
+
+            //Only output state or exception if it exists
+
+            if (state != null)
+            {
+                Console.Write($", State: {state}");
+            }
+            if (exception != null)
+            {
+                Console.Write($", Exception: {exception.Message}");
+            }
+            Console.WriteLine();
         }
-        if (exception != null)
-        {
-            Console.Write($", Exception: {exception.Message}");
-        }
-        Console.WriteLine();
     }
 }
