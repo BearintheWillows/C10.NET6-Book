@@ -9,10 +9,16 @@ using WorkingWithEFCore.Models;
 
 Console.WriteLine( $"Using {ProjectConstants.DbProvider} database provider" );
 
-QueryingCategories();
+//QueryingCategories();
 // FilteredIncludes();
 //QueryingProducts();
 // QueryingWithLike();
+
+if ( AddProduct( categoryId: 6, productName: "Bob's Burgers", price: 500M ) )
+{
+    Console.WriteLine( "Add Product Successful" );
+}
+ListProducts();
 
 static void QueryingCategories()
 {
@@ -170,5 +176,48 @@ static void QueryingWithLike()
             p.ProductName,
             p.Stock,
             p.Discontinued );
+    }
+}
+
+static bool AddProduct( int categoryId, string productName, decimal? price )
+{
+    Northwind db = new();
+
+    Product product = new()
+    {
+        CategoryID = categoryId,
+        ProductName = productName,
+        Cost = price,
+    };
+
+    //Mark product as added
+    db.Products.Add( product );
+
+    //Save tracked change
+
+    int affected = db.SaveChanges();
+    return ( affected == 1 );
+}
+
+static void ListProducts()
+{
+    Northwind db = new();
+
+    Console.WriteLine( "{0, -3} {1, -35} {2,8} {3,5} {4}",
+        "Id",
+        "Product Name",
+        "Cost",
+        "Stock",
+        "Disc" );
+
+    foreach ( var item in db.Products.OrderByDescending( product
+         => product.Cost ) )
+    {
+        Console.WriteLine( "{0:000} {1, -35} {2,8:$#,##0.00} {3,5} {4}",
+            item.ProductID,
+            item.ProductName,
+            item.Cost,
+            item.Stock,
+            item.Discontinued );
     }
 }
