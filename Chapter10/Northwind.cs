@@ -5,41 +5,53 @@ namespace WorkingWithEFCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class Northwind : DbContext {
-	//Props map to the tables in the database
-	public DbSet<Category>? Categories { get; set; }
-	public DbSet<Product>?  Products   { get; set; }
+public class Northwind : DbContext
+{
+    //Props map to the tables in the database
+    public DbSet<Category>? Categories { get; set; }
+    public DbSet<Product>? Products { get; set; }
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-		if ( ProjectConstants.DbProvider == "SQLite" ) {
-			var path = Path.Combine( Environment.CurrentDirectory, "Northwind.db" );
-			WriteLine();
-			WriteLine( $"Using {path} database file" );
+    protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
+    {
+        optionsBuilder.UseLazyLoadingProxies();
 
-			optionsBuilder.UseSqlite( $"Filename={path}" );
-		} else {
-			var connection = "Data Source=.;" +
-			                 "Initial Catalog=Northwind;" +
-			                 "Integrated Security=true;" +
-			                 "MultipleActiveResultSets=true;";
-			optionsBuilder.UseSqlServer( connection );
-		}
-	}
+        if ( ProjectConstants.DbProvider == "SQLite" )
+        {
+            var path = Path.Combine( Environment.CurrentDirectory, "Northwind.db" );
+            WriteLine();
+            WriteLine( $"Using {path} database file" );
 
-	protected void OnModelCreating(ModelBuilder modelBuilder) {
-		// Fluent API instead of attributes to limit length of cat name
+            optionsBuilder.UseSqlite( $"Filename={path}" );
+        }
+        else
+        {
+            var connection = "Data Source=.;" +
+                             "Initial Catalog=Northwind;" +
+                             "Integrated Security=true;" +
+                             "MultipleActiveResultSets=true;";
+            optionsBuilder.UseSqlServer( connection );
+        }
+    }
 
-		modelBuilder.Entity<Category>()
-		            .Property( category => category.CategoryName )
-		            .IsRequired() // Not null
-		            .HasMaxLength( 15 );
-		modelBuilder.Entity<Product>()
-		            .HasKey( product => product.ProductID );
+    protected void OnModelCreating( ModelBuilder modelBuilder )
+    {
+        // Fluent API instead of attributes to limit length of cat name
 
-		//Used to fix SQLites lack of decimal support
-		if ( ProjectConstants.DbProvider == "SQLite" )
-			modelBuilder.Entity<Product>()
-			            .Property( product => product.Cost )
-			            .HasConversion<double>();
-	}
+        modelBuilder.Entity<Category>()
+                    .Property( category => category.CategoryName )
+                    .IsRequired() // Not null
+                    .HasMaxLength( 15 );
+        modelBuilder.Entity<Product>()
+                    .HasKey( product => product.ProductID );
+
+        //Global filter to remove discontinued products
+        modelBuilder.Entity<Product>()
+                    .HasQueryFilter( product => !product.Discontinued );
+
+        //Used to fix SQLites lack of decimal support
+        if ( ProjectConstants.DbProvider == "SQLite" )
+            modelBuilder.Entity<Product>()
+                        .Property( product => product.Cost )
+                        .HasConversion<double>();
+    }
 }
