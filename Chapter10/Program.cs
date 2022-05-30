@@ -14,11 +14,31 @@ Console.WriteLine( $"Using {ProjectConstants.DbProvider} database provider" );
 //QueryingProducts();
 // QueryingWithLike();
 
-if ( AddProduct( categoryId: 6, productName: "Bob's Burgers", price: 500M ) )
+/*string name = "Bob";
+for ( int i = 0; i < 3; i++ )
 {
-    Console.WriteLine( "Add Product Successful" );
+    AddProduct( 1, name, 20M );
+    name = name + 1;
+}*/
+
+//if ( AddProduct( categoryId: 6, productName: "Bob's Burgers", price: 500M ) )
+//{
+//  Console.WriteLine( "Add Product Successful" );
+//}
+//ListProducts();
+
+
+/*if ( IncreasePrice( productNameStartsWith: "Bob", amount: 20M ) )
+{
+    Console.WriteLine( "Update product price Successful" );
 }
 ListProducts();
+*/
+
+int deleted = DeleteProducts(productNameStartsWith: "Bob");
+
+Console.WriteLine( $"{deleted} product(s) were deleted." );
+
 
 static void QueryingCategories()
 {
@@ -220,4 +240,40 @@ static void ListProducts()
             item.Stock,
             item.Discontinued );
     }
+}
+
+static bool IncreasePrice( string productNameStartsWith, decimal amount )
+{
+    Northwind db = new();
+
+    //Get first product whos name starts with name
+    var updateProduct = db.Products.First(p =>
+            p.ProductName.StartsWith(productNameStartsWith));
+
+    updateProduct.Cost += amount;
+
+    int affected = db.SaveChanges();
+
+    return ( affected == 1 );
+}
+
+static int DeleteProducts( string productNameStartsWith )
+{
+    Northwind db = new();
+
+    IQueryable<Product>? products = db.Products?.Where(p =>
+    p.ProductName.StartsWith(productNameStartsWith));
+
+    if ( products is null )
+    {
+        Console.WriteLine( "No Products found" );
+        return 0;
+    }
+    else
+    {
+        db.Products.RemoveRange( products );
+    }
+
+    int affected = db.SaveChanges();
+    return affected;
 }
