@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage; //IDbContextTransaction
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WorkingWithEFCore;
@@ -261,19 +262,26 @@ static int DeleteProducts( string productNameStartsWith )
 {
     Northwind db = new();
 
-    IQueryable<Product>? products = db.Products?.Where(p =>
+    using ( IDbContextTransaction t = db.Database.BeginTransaction() )
+    {
+        Console.WriteLine( "Transaction isolation level: {0}",
+            arg0: t.GetDbTransaction().IsolationLevel );
+
+        IQueryable<Product>? products = db.Products?.Where(p =>
     p.ProductName.StartsWith(productNameStartsWith));
 
-    if ( products is null )
-    {
-        Console.WriteLine( "No Products found" );
-        return 0;
-    }
-    else
-    {
-        db.Products.RemoveRange( products );
-    }
+        if ( products is null )
+        {
+            Console.WriteLine( "No Products found" );
+            return 0;
+        }
+        else
+        {
+            db.Products.RemoveRange( products );
+        }
 
-    int affected = db.SaveChanges();
-    return affected;
+        int affected = db.SaveChanges();
+        t.Commit();
+        return affected;
+    }
 }

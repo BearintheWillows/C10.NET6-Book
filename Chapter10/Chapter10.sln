@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithEFCore", "WorkingWithEFCore.csproj", "{B237252E-3C63-40CD-9974-B7675F3ACC2D}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkingWithEFCore", "WorkingWithEFCore.csproj", "{B237252E-3C63-40CD-9974-B7675F3ACC2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseAndStudents", "..\CourseAndStudents\CourseAndStudents.csproj", "{42023CED-C0F0-4EC8-9A0F-BD17A60C5B32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{B237252E-3C63-40CD-9974-B7675F3ACC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B237252E-3C63-40CD-9974-B7675F3ACC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B237252E-3C63-40CD-9974-B7675F3ACC2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42023CED-C0F0-4EC8-9A0F-BD17A60C5B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42023CED-C0F0-4EC8-9A0F-BD17A60C5B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42023CED-C0F0-4EC8-9A0F-BD17A60C5B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42023CED-C0F0-4EC8-9A0F-BD17A60C5B32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B66EEC0-EDFB-457B-AB7A-008755AD4B68}
 	EndGlobalSection
 EndGlobal
