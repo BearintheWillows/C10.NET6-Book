@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonitoringApp", "Monitoring
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarking", "Benchmarking\Benchmarking.csproj", "{297CE1B1-7501-4C63-9E8C-5483D623B0F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithTasks", "WorkingWithTasks\WorkingWithTasks.csproj", "{11B411E5-5F65-4217-929E-C38A7003FB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{297CE1B1-7501-4C63-9E8C-5483D623B0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{297CE1B1-7501-4C63-9E8C-5483D623B0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{297CE1B1-7501-4C63-9E8C-5483D623B0F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B411E5-5F65-4217-929E-C38A7003FB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B411E5-5F65-4217-929E-C38A7003FB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B411E5-5F65-4217-929E-C38A7003FB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B411E5-5F65-4217-929E-C38A7003FB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
