@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NestedAndChildTasks", "Nest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynchronizingResourceAccess", "SynchronizingResourceAccess\SynchronizingResourceAccess.csproj", "{84FE33DA-58C7-4749-B7E9-F39C9F5D3217}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncConsole", "AsyncConsole\AsyncConsole.csproj", "{558E0F54-9DC0-44F3-83CC-B052B38429DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyncEnumerable", "AyncEnumerable\AyncEnumerable.csproj", "{59F33CEA-09DB-45FF-824D-66246AC70C81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{84FE33DA-58C7-4749-B7E9-F39C9F5D3217}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84FE33DA-58C7-4749-B7E9-F39C9F5D3217}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84FE33DA-58C7-4749-B7E9-F39C9F5D3217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558E0F54-9DC0-44F3-83CC-B052B38429DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558E0F54-9DC0-44F3-83CC-B052B38429DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558E0F54-9DC0-44F3-83CC-B052B38429DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558E0F54-9DC0-44F3-83CC-B052B38429DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F33CEA-09DB-45FF-824D-66246AC70C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F33CEA-09DB-45FF-824D-66246AC70C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F33CEA-09DB-45FF-824D-66246AC70C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F33CEA-09DB-45FF-824D-66246AC70C81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
