@@ -1,4 +1,5 @@
 ﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Packt.Shared
 @model Northwind.Web.Pages.SuppliersModel
 <div class="row">
@@ -20,10 +21,25 @@
                     <td>@item.CompanyName</td>
                     <td>@item.Country</td>
                     <td>@item.Phone</td>
-                    </tr>
+                </tr>
             }
         }
         </tbody>
     </table>
-    
+</div>
+
+<div class="row">
+    <p>Enter details for a new supplier:</p>
+    <form method="post">
+        <div>
+            <input asp-for="Supplier.CompanyName" placeholder="Company Name" />
+        </div>
+        <div>
+            <input asp-for="Supplier.Country" placeholder="Country"/>
+        </div>
+        <div>
+            <input asp-for="Supplier.Phone" placeholder="Phone #"/>
+        </div>
+        <input type="submit">
+    </form>
 </div>
