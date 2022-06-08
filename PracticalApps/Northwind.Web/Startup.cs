@@ -1,9 +1,13 @@
 namespace Northwind.Web;
+
+using Packt.Shared;
+
 public class Startup
 {
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddRazorPages();
+		services.AddNorthwindContext();
 	}
 	public void Configure(
 		IApplicationBuilder app, IWebHostEnvironment env)
