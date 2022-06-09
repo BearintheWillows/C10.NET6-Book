@@ -1,0 +1,63 @@
+@page
+@model Northwind.Web.Pages.CustomersModel
+
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <div class="row">
+        <h1 class="display-2">Customers</h1>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Company Name</th>
+                <th>Contact Role</th>
+                <th>Contact Name</th>
+                <th>Country</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{var currentCountry = "Argentina";}
+            @if ( Model.Customers != null )
+            {
+                
+                @foreach ( var item in Model.Customers )
+                {
+                   
+                    @if (item.Country ==  currentCountry ) {
+                        <tr>
+                            <td>@item.CompanyName</td>
+                            <td>@item.ContactTitle</td>
+                            <td>@item.ContactName</td>
+                            <td>@item.Country</td>
+                            <td>@item.Phone</td>
+                        </tr>   
+                         
+                    } else {
+                        <tr>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                        </tr>
+                        currentCountry = item.Country;
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

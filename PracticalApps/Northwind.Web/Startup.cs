@@ -1,6 +1,7 @@
 namespace Northwind.Web;
 
 using Packt.Shared;
+using static Console;
 
 public class Startup
 {
