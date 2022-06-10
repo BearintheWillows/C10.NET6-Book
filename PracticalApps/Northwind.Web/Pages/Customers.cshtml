@@ -14,12 +14,11 @@
 <html lang="en">
 <head>
     <title></title>
+    
 </head>
 <body>
 <div>
-    
-    <a asp-page="CustomerDetail" asp-route-id="ALFKI">ALFKI</a>
-    
+
     <div class="row">
         <h1 class="display-2">Customers</h1>
         <table class="table">
@@ -39,12 +38,12 @@
                 @foreach ( var item in Model.Customers ) {
 
                     @if ( item.Country == currentCountry ) {
-                        <tr>
-                            <td><a asp-for></a> @item.CompanyName</td>
-                            <td>@item.ContactTitle</td>
-                            <td>@item.ContactName</td>
-                            <td>@item.Country</td>
-                            <td>@item.Phone</td>
+                        <tr class="tableRow">
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.CompanyName</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.ContactTitle</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.ContactName</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.Country</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.Phone</a></td>
                         </tr>
 
                     } else {
@@ -64,4 +63,6 @@
     </div>
 </div>
 </body>
+
+<link rel="stylesheet" href="/styles.css">
 </html>

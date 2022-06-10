@@ -13,9 +13,16 @@
     <title></title>
 </head>
 <body>
-<div>
+<div class="container">
+    <div class="customercard"></div>
     <p>@Model.Customer?.CompanyName</p>
     <p>@Model.Customer?.CustomerId</p>
+
+    @foreach ( var item in @Model.Orders ) {
+        <p>@item.OrderId</p>
+        <p>@item.ShipAddress</p>
+        <p>@item.ShippedDate</p>
+    }
 </div>
 </body>
 </html>
