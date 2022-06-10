@@ -11,18 +11,31 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <div class="container">
-    <div class="customercard"></div>
-    <p>@Model.Customer?.CompanyName</p>
-    <p>@Model.Customer?.CustomerId</p>
-
-    @foreach ( var item in @Model.Orders ) {
-        <p>@item.OrderId</p>
-        <p>@item.ShipAddress</p>
-        <p>@item.ShippedDate</p>
-    }
+    <div class="customerCard">
+        <div class="title">
+            <h1>@Model.Customer?.CompanyName</h1>  
+        </div>
+        <hr />
+        <div class="contactInfo">
+            <h3 class="firstLine">Contact Name: @Model.Customer.ContactName</h3>
+            <h3 class="firstLine">Contact Title: @Model.Customer.ContactTitle</h3>
+            <h3 class="secondLine">Phone: @Model.Customer.Phone</h3>
+            <h3 class="secondLine">Fax: @Model.Customer.Fax</h3>
+        </div>
+        <div class="addressInfo">
+            <h3>@Model.Customer.Address</h3>
+            <h3>@Model.Customer.City</h3>
+            <h3>@Model.Customer.Region</h3>
+            <h3>@Model.Customer.PostalCode</h3>
+            <h3>@Model.Customer.</h3>
+        </div>
+    </div>
 </div>
 </body>
+
+<link rel="stylesheet" href="/styles.css">
 </html>
