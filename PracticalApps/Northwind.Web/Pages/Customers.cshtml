@@ -1,0 +1,68 @@
+@page
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@model Northwind.Web.Pages.CustomersModel
+
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title></title>
+    
+</head>
+<body>
+<div>
+
+    <div class="row">
+        <h1 class="display-2">Customers</h1>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Company Name</th>
+                <th>Contact Role</th>
+                <th>Contact Name</th>
+                <th>Country</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{var currentCountry = "Argentina";}
+            @if ( Model.Customers != null ) {
+
+                @foreach ( var item in Model.Customers ) {
+
+                    @if ( item.Country == currentCountry ) {
+                        <tr class="tableRow">
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.CompanyName</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.ContactTitle</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.ContactName</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.Country</a></td>
+                            <td><a asp-page="CustomerDetail" asp-route-id="@item.CustomerId">@item.Phone</a></td>
+                        </tr>
+
+                    } else {
+                        <tr>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                            <td><hr/></td>
+                        </tr>
+                        currentCountry = item.Country;
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+<link rel="stylesheet" href="/styles.css">
+</html>
