@@ -1,4 +1,7 @@
 @page
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
 @model Northwind.Web.Pages.CustomersModel
 
 @{
@@ -14,6 +17,9 @@
 </head>
 <body>
 <div>
+    
+    <a asp-page="CustomerDetail" asp-route-id="ALFKI">ALFKI</a>
+    
     <div class="row">
         <h1 class="display-2">Customers</h1>
         <table class="table">
@@ -28,21 +34,19 @@
             </thead>
             <tbody>
             @{var currentCountry = "Argentina";}
-            @if ( Model.Customers != null )
-            {
-                
-                @foreach ( var item in Model.Customers )
-                {
-                   
-                    @if (item.Country ==  currentCountry ) {
-                        <tr> 
-                            <td>@item.CompanyName</td>
+            @if ( Model.Customers != null ) {
+
+                @foreach ( var item in Model.Customers ) {
+
+                    @if ( item.Country == currentCountry ) {
+                        <tr>
+                            <td><a asp-for></a> @item.CompanyName</td>
                             <td>@item.ContactTitle</td>
                             <td>@item.ContactName</td>
                             <td>@item.Country</td>
                             <td>@item.Phone</td>
-                        </tr>   
-                         
+                        </tr>
+
                     } else {
                         <tr>
                             <td><hr/></td>

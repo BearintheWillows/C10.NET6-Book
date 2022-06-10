@@ -1,0 +1,21 @@
+@page
+@using Packt.Shared
+@model Northwind.Web.Pages.CustomerDetailModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <p>@Model.Customer?.CompanyName</p>
+    <p>@Model.Customer?.CustomerId</p>
+</div>
+</body>
+</html>
