@@ -4,6 +4,8 @@ using Northwind.Mvc.Models;
 
 namespace Northwind.Mvc.Controllers;
 
+using Microsoft.AspNetCore.Authorization;
+
 public class HomeController : Controller {
 	private readonly ILogger<HomeController> _logger;
 
@@ -12,9 +14,15 @@ public class HomeController : Controller {
 	}
 
 	public IActionResult Index() {
+		_logger.LogError( "Serious error! Jokes!" );
+		_logger.LogWarning( "First Warning" );
+		_logger.LogWarning( "Second Warning!" );
+		_logger.LogInformation( "Index Method of Home Controller" );
+		
 		return View();
 	}
 
+	[Authorize(Roles = "Administrators")]
 	public IActionResult Privacy() {
 		return View();
 	}
