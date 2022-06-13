@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Mvc.Models;
+using Packt.Shared;
 
 namespace Northwind.Mvc.Controllers;
 
@@ -8,9 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 
 public class HomeController : Controller {
 	private readonly ILogger<HomeController> _logger;
+	private readonly NorthwindContext        db;
 
-	public HomeController(ILogger<HomeController> logger) {
+	public HomeController(ILogger<HomeController> logger, NorthwindContext db) {
 		_logger = logger;
+		this.db = db;
 	}
 
 	[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
@@ -19,8 +22,13 @@ public class HomeController : Controller {
 		_logger.LogWarning( "First Warning" );
 		_logger.LogWarning( "Second Warning!" );
 		_logger.LogInformation( "Index Method of Home Controller" );
+
+		HomeIndexViewModel model = new (VisitorCount: ( new Random() ).Next( 1, 1001 ),
+		                               Categories: db.Categories.ToList(),
+		                               Products: db.Products.ToList()
+		);
 		
-		return View();
+		return View(model);
 	}
 	
 	[Route("private")]

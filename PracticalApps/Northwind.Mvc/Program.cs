@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Mvc.Data;
+using Packt.Shared;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -10,6 +11,10 @@ builder.Services.AddDbContext<ApplicationDbContext>( options =>
 	                                                     options.UseSqlite( connectionString )
 );
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+string sqlServerConnection = builder.Configuration
+                                    .GetConnectionString( "NorthwindConnection" );
+builder.Services.AddNorthwindContext( sqlServerConnection );
 
 builder.Services.AddDefaultIdentity<IdentityUser>( options => options.SignIn.RequireConfirmedAccount = true )
        .AddRoles<IdentityRole>() //Enable Role management
