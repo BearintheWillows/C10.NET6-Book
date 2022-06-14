@@ -10,11 +10,11 @@ var connectionString = builder.Configuration.GetConnectionString( "DefaultConnec
 builder.Services.AddDbContext<ApplicationDbContext>( options =>
 	                                                     options.UseSqlite( connectionString )
 );
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-string sqlServerConnection = builder.Configuration
-                                    .GetConnectionString( "NorthwindConnection" );
+string sqlServerConnection = builder.Configuration.GetConnectionString( "NorthwindConnection" );
 builder.Services.AddNorthwindContext( sqlServerConnection );
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>( options => options.SignIn.RequireConfirmedAccount = true )
        .AddRoles<IdentityRole>() //Enable Role management
